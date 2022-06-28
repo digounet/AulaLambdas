@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class Veiculo {
     private String placa;
@@ -21,6 +22,12 @@ public class Veiculo {
         this.placa = placa;
         this.dataHoraEntrada = LocalDateTime.now();
         this.categoria = categoria;
+    }
+
+
+    public void saida(Double valorCobrado) {
+        this.dataHoraSaida = LocalDateTime.now();
+        this.valorCobrado = valorCobrado;
     }
 
     public String getPlaca() {
@@ -51,5 +58,19 @@ public class Veiculo {
                 this.categoria,
                 this.dataHoraEntrada.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")),
                 this.dataHoraSaida);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Veiculo && o != null) {
+            return this.placa.equals(((Veiculo) o).getPlaca());
+        }
+
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(placa, dataHoraEntrada, dataHoraSaida, categoria, valorCobrado);
     }
 }

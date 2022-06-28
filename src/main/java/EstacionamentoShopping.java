@@ -18,8 +18,18 @@ public class EstacionamentoShopping implements Estacionamento {
     }
 
     @Override
-    public void saidaVeiculo(Veiculo veiculo) {
+    public void saidaVeiculo(String placa) {
+        this.veiculos.forEach(v -> {
+            if (v.getPlaca().equals(placa)) {
+                v.saida(12.0);
+            }
+        });
 
+        for (Veiculo veiculo: this.veiculos) {
+            if (veiculo.getPlaca().equals(placa)) {
+                veiculo.saida(12.0);
+            }
+        }
     }
 
     @Override
@@ -88,7 +98,7 @@ public class EstacionamentoShopping implements Estacionamento {
         }
     }
 
-    public void listarPorCategoria(Predicate<Veiculo> pesquisaVeiculoPreco) {
+    public void listar(Predicate<Veiculo> pesquisaVeiculoPreco) {
         for (Veiculo veiculo: this.veiculos) {
             if (pesquisaVeiculoPreco.test(veiculo)) {
                 System.out.println(veiculo);

@@ -2,7 +2,7 @@ import java.util.function.Predicate;
 
 public interface Estacionamento {
     void entradaVeiculo(Veiculo veiculo);
-    void saidaVeiculo(Veiculo veiculo);
+    void saidaVeiculo(String placa);
     void cobrar(Veiculo veiculo);
 
     void listarVeiculos();
@@ -15,5 +15,5 @@ public interface Estacionamento {
 
     void retornaVeiculoValor(PesquisaVeiculoPreco pesquisaVeiculoPreco );
 
-    void listarPorCategoria(Predicate<Veiculo> pesquisaVeiculoPreco);
+    void listar(Predicate<Veiculo> pesquisaVeiculoPreco);
 }

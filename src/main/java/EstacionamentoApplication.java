@@ -1,22 +1,8 @@
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.TemporalAccessor;
-import java.time.temporal.TemporalQuery;
 
 public class EstacionamentoApplication {
 
     public static void main(String[] args) {
-        //aulaLambda();
-        exercicioLambda();
-    }
-
-    //Implementar a saída de veículos
-    //e filtrar todos que ficaram mais de 2h no estacionamento (com lambda)
-    private static void exercicioLambda() {
-
-    }
-
-    private static void aulaLambda() {
         Estacionamento shopping = new EstacionamentoShopping();
         shopping.entradaVeiculo(new Veiculo("ABC1234", Categoria.PEQUENO));
         shopping.entradaVeiculo(new Veiculo("ABC1235", Categoria.PEQUENO));
@@ -24,6 +10,27 @@ public class EstacionamentoApplication {
         shopping.entradaVeiculo(new Veiculo("DBC1237", Categoria.GRANDE));
         shopping.entradaVeiculo(new Veiculo("ABC1238", Categoria.MEDIO));
         shopping.entradaVeiculo(new Veiculo("ABC1239", Categoria.MEDIO));
+
+        //aulaLambda(shopping);
+        exercicioLambda(shopping);
+    }
+
+    //Implementar a saída de veículos
+    //e filtrar todos que ficaram mais de 2h no estacionamento (com lambda)
+    private static void exercicioLambda(Estacionamento estacionamento) {
+        estacionamento.saidaVeiculo("ABC1234");
+        estacionamento.saidaVeiculo("ABC1239");
+
+        estacionamento.listar(v -> {
+            if (v.getDataHoraSaida() != null) {
+                return LocalDate.from(v.getDataHoraSaida()).isEqual(LocalDate.now());
+            }
+
+            return false;
+        });
+    }
+
+    private static void aulaLambda(Estacionamento shopping) {
 
         //shopping.listarVeiculos();
         //shopping.listarVeiculoPorCategoriaPorPlaca(Categoria.GRANDE);
@@ -35,7 +42,7 @@ public class EstacionamentoApplication {
             }
         });
 
-        shopping.listarPorCategoria( v -> v.getCategoria().equals(Categoria.MEDIO));
+        shopping.listar( v -> v.getCategoria().equals(Categoria.MEDIO));
 
 
         shopping.listarPorCategoria(Categoria.MEDIO, (v, c) -> v.getCategoria().equals(c));
